@@ -11,27 +11,37 @@
   </div>
 
   <div class="scroll">
-    <div class="m-scroll row ">
-      <span class="mt-5 pt-5">1º lugar: Lucas </span>
-      <span class="mt-5 pt-5">1º lugar: Lucas </span>
-      <span class="mt-5 pt-5">1º lugar: Lucas </span>
+    <div class="m-scroll row" >
+      <span class="mt-5 pt-5 ps-5" v-if="position[0]">1º Lugar {{ position[0] }}</span>
+      <span class="mt-5 pt-5" v-if="position[1]">2º Lugar {{ position[1] }} </span>
+      <span class="mt-5 pt-5" v-if="position[2]">3º Lugar {{ position[2] }} </span>
     </div>
+    <span class="mt-5 pt-5" v-if="position[0] == null && position[1] == null && position[2] == null">Sem informações</span>
   </div>
 </template>
 
 <script>
 import NavbarAll from './navbar/NavbarAll.vue';
+import axios from 'axios';
+
 export default {
   name: 'HelloWorld',
   components:{
     NavbarAll
+  },
+  beforeMount(){
+    axios.post('http://localhost:8080/ranking').then((t)=>{this.position = t.data});
+  },
+  data(){
+    return{
+      position:Array
+    }
   }
 
 }
 </script>
 
 <style>
-
 
 .sublin {
   width: 42vh;
@@ -50,8 +60,6 @@ export default {
   aspect-ratio: 2/1;
   object-fit: contain;
 }
-
-
 
 /* scroll verticale */
 

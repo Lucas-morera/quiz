@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
-class GameController extends Controller
+class GamegeralController extends Controller
 {
     public function index(){
         $data = DB::table('perguntas')
@@ -22,6 +25,9 @@ class GameController extends Controller
        $email = $request->email;
        $senha = $request->senha;
 
+       $telefone =  Str::replace(' ','',Str::replace('-','',Str::replace(')','',Str::replace('(','',$request->telefone))));
+       $cpf = Str::replace('.','',Str::replace('-','', $request->cpf));
+
        $usuarios = DB::table('usuarios')
        ->where('email', '=', $email)->first();
 
@@ -30,7 +36,7 @@ class GameController extends Controller
           return response()->json(['success' => 'false' ]);
         }
         else{
-         $query =  DB::table('usuarios')->insert(['email' => $email ,'nome' => $nome , 'senha' => Hash::make($senha) ]); 
+         $query=DB::table('usuarios')->insert(['email'=>$email,'nome'=>$nome,'senha'=>Hash::make($senha) , 'telefone' => $telefone , 'cpf' => $cpf]); 
           if($query){
             return response()->json(['success'=>'true']);
           }
@@ -38,11 +44,18 @@ class GameController extends Controller
        
     }
 
-    public function login(){
-
-      return response()->json(['success','true']);
+    public function login(Request $request){
+    $email =  DB::table('usuarios')->where('email','=',$request->email)->first();
+    if($email){
+      if (Hash::check($request->senha, $email->senha)) {
+        return response()->json(["success"=>"true","idlogin"=>$email->id,"idNome"=>$email->nome]);
+      }
     }
-
+    else{
+      return response()->json(['success'=>'false']);
+    }
+  }
+  
     public function score(Request $request){
 
       $query = DB::table('score')->where("usuario_fk","=",$request->idLogin)->first();
@@ -55,7 +68,7 @@ class GameController extends Controller
 
         DB::table('score')->where('id',$request->idLogin)->update(['score'=>$request->score]);
        
-        return response()->json(["success"=>"recorde"]);
+        return response()->json(["success"=>"Score Atualizado!"]);
       }
       ///////////////////////////////////////
       ////// se não estiver jogado//////////
@@ -67,7 +80,7 @@ class GameController extends Controller
           'score'=>$request->score 
         ]);
 
-        return response()->json(["success"=>"recorde"]);
+        return response()->json(["success"=>"Recorde Salvo !"]);
       }
 
     }
@@ -113,7 +126,7 @@ class GameController extends Controller
      $score = DB::table('score')
                  ->join('usuarios', 'score.usuario_fk', '=', 'usuarios.id')
                  ->select('score.nome')
-                 ->orderBy('score.score','desc')
+                 ->orderBy('score.score','asc')
                  ->limit('3')
                  ->get();
 

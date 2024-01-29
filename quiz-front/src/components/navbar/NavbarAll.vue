@@ -30,7 +30,7 @@
         <span id="no" class="position-absolute end-0 me-5 pe-5">{{ nomeUser }}</span>
         <span class="position-absolute end-0 me-5"><i class="bi bi-person-circle" style="font-size: 1.5rem; "></i></span>
         <span v-if="this.nomeUser" class="position-absolute end-0 me-2"><i class="bi bi-box-arrow-right"
-            style="font-size: 1.5rem; cursor: pointer;" v-on:click="exit"></i></span>
+            style="font-size: 1.5rem; cursor: pointer;" @click="exit()" title="Sair"></i></span>
       </div>
     </div>
   </nav>
@@ -51,8 +51,14 @@ export default {
     }
   },methods:{
     exit(){
-      window.sessionStorage.removeItem('server');
-      if(window.sessionStorage.getItem('server') === null){
+        window.sessionStorage.removeItem('server');
+        window.sessionStorage.removeItem('idLogin');
+        window.sessionStorage.removeItem('idNome');
+        window.sessionStorage.removeItem('acertos');
+        window.sessionStorage.removeItem('erros');
+        window.sessionStorage.removeItem('score');
+        
+      if(window.sessionStorage.getItem('server') === null && window.sessionStorage.getItem('idLogin') === null && window.sessionStorage.getItem('idNome') === null){
         window.location.reload();
       }
     }

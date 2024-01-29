@@ -18,10 +18,13 @@
                         <input type="text" id="email" v-model="email" class="form-control">
                         <label for="" class="d-flex mt-2">Senha</label>
                         <input type="password" id="senha" v-model="senha" class="form-control">
+                        <label for="" class="d-flex mt-2" >CPF</label>
+                        <vue-mask class="form-control" v-model="cpf" mask="000.000.000-00" :raw="false" :maxlenght="2"></vue-mask>
+                        <label for="" class="d-flex mt-2">Telefone</label>
+                        <vue-mask type="text" id="telefone" v-model="telefone" mask="00 00000-0000"  class="form-control" ></vue-mask>
                         <div id="request" class="mt-3"></div>
                         <button class="btn btn-success mt-3" v-on:click="cadastrar"> <span id="spinner"
-                                class="spinner-border spinner-border-sm text-info visually-hidden" role="status"
-                                aria-hidden="true"></span> Cadastrar</button>
+                                class="spinner-border spinner-border-sm text-info visually-hidden" role="status" aria-hidden="true"></span> Cadastrar</button>
                     </div>
                 </div>
             </div>
@@ -29,13 +32,17 @@
     </div>
 </template>
 
+
 <script>
+import vueMask from 'vue-jquery-mask';
 import axios from 'axios';
 import NavbarAll from '@/components/navbar/NavbarAll.vue';
+
+
 export default {
     name: 'CadastroView',
     components: {
-        NavbarAll
+        vueMask, NavbarAll 
     },
     methods: {
         async cadastrar() {
@@ -54,7 +61,9 @@ export default {
                 const data = await axios.post("http://localhost:8080/cadastro", {
                     nome: this.nome,
                     email: this.email,
-                    senha: this.senha
+                    senha: this.senha,
+                    telefone: this.telefone,
+                    cpf : this.cpf,
                 }).then(request => request);
 
                 console.log(data);
@@ -82,7 +91,7 @@ export default {
 }
 
 .menu {
-    margin-top: 23vh;
+    margin-top: 11vh;
 }
 
 .bg-text {
