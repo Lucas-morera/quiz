@@ -21,7 +21,7 @@
                         <label for="" class="d-flex mt-2" >CPF</label>
                         <vue-mask class="form-control" v-model="cpf" mask="000.000.000-00" :raw="false" :maxlenght="2"></vue-mask>
                         <label for="" class="d-flex mt-2">Telefone</label>
-                        <vue-mask type="text" id="telefone" v-model="telefone" mask="00 00000-0000"  class="form-control" ></vue-mask>
+                        <vue-mask type="text" id="telefone" v-model="telefone" mask="(00) 00000-0000"  class="form-control" ></vue-mask>
                         <div id="request" class="mt-3"></div>
                         <button class="btn btn-success mt-3" v-on:click="cadastrar"> <span id="spinner"
                                 class="spinner-border spinner-border-sm text-info visually-hidden" role="status" aria-hidden="true"></span> Cadastrar</button>
