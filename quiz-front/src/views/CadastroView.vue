@@ -44,6 +44,10 @@ export default {
     components: {
         vueMask, NavbarAll 
     },
+    mounted: function(){
+      let a =  document.querySelector("#telefone");
+      a.value = "";
+    },
     methods: {
         async cadastrar() {
             let spinner = document.querySelector("#spinner");

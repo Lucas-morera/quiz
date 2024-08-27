@@ -2,7 +2,17 @@
     <NavbarAll/>
     <div class="container-fluid">
 
-  <img class="img mt-5" src="../assets/img/capa.jpg" alt="">
+  <div class="row"> 
+    <div class="col-sm-6">
+      <img class="img mt-5" src="../assets/img/Mario.png" alt="">
+    </div>
+    <div class="col-sm-6 text-pt1">
+      <div class="">
+        <h5>Jogue de graça e aprenda com o quiz gaming</h5>  
+        <hr class="sublin mb-4" style="color:yellow; opacity:inherit; width: 69vh;">
+      </div>
+    </div>
+  </div>    
 
   <div class="mt-5 w-100">
     <h5 class="">Ranking de jogadores (Nicks)</h5>
@@ -59,6 +69,12 @@ export default {
 </script>
 
 <style>
+.text-pt1{
+  display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+}
 
 .sublin {
   width: 42vh;
