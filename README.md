@@ -5,3 +5,4 @@ Inicie um cadastro e realize o login e responda as perguntas.
 
 Sistema feito com as seguintes tecnologias:
 Vue(js), Laravel(PHP) e Mysql.
+;
