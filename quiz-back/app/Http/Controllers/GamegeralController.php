@@ -123,17 +123,22 @@ class GamegeralController extends Controller
     }
 
     public function ranking(){
-     $score = DB::table('score')
-                 ->join('usuarios', 'score.usuario_fk', '=', 'usuarios.id')
-                 ->select('score.nome')
-                 ->orderBy('score.score','asc')
-                 ->limit('3')
-                 ->get();
+    $score = DB::table('score as s')
+    ->join('usuarios as u', 'u.id', '=', 's.usuario_fk')
+    ->select('s.nome', DB::raw('MAX(s.score) as maior'))
+    ->groupBy('s.usuario_fk', 's.nome')
+    ->orderByDesc('maior')
+    ->limit(3)
+    ->get();
 
-     $usuarios = array();
-      foreach ($score as $value) {
-        $usuarios = Arr::prepend($usuarios,$value->nome);
-      }
-        return $usuarios;
-    }
+
+  $usuarios = [];
+
+  foreach ($score as $value) {
+      $usuarios[] = $value->nome;
+  }
+
+  return $usuarios;
+
+  }
 }

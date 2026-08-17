@@ -109,18 +109,7 @@ class GameController extends Controller
       }
     }
 
-    public function ranking(){
-     $score = DB::table('score')
-                 ->join('usuarios', 'score.usuario_fk', '=', 'usuarios.id')
-                 ->select('score.nome')
-                 ->orderBy('score.score','desc')
-                 ->limit('3')
-                 ->get();
+   
+           
 
-     $usuarios = array();
-      foreach ($score as $value) {
-        $usuarios = Arr::prepend($usuarios,$value->nome);
-      }
-        return $usuarios;
-    }
 }
