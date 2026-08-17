@@ -1,8 +1,30 @@
-Faça o dump do banco primeiramente na pasta "dumpSql"
-inicie o servidor do backend com o comando "php artisan serve" e depois inicie o do vue com "npm run serve". 
-Logo após clique no servidor do front-end com o Link local "http://localhost:8080/".
-Inicie um cadastro e realize o login e responda as perguntas.
+# 🚀 Nome do Projeto
 
+> Aplicação Web Full Stack com **Backend API em Laravel** e **Frontend em Vue.js**, integrada ao banco de dados **MySQL**.
 
-Sistema feito com as seguintes tecnologias:
-Vue(js), Laravel(PHP) e Mysql.
+---
+
+## 🏗️ Arquitetura do Projeto
+
+O sistema foi desenvolvido de forma totalmente desacoplada:
+
+* **Backend (API REST):** Desenvolvido em **Laravel (PHP)**, responsável pelo gerenciamento de dados, autenticação, rotas de API e regras de negócio.
+* **Frontend (SPA):** Desenvolvido em **Vue.js**, consumindo diretamente as rotas da API REST disponibilizadas pelo backend.
+* **Banco de Dados:** **MySQL**.
+
+---
+
+## 🛠️ Tecnologias Utilizadas
+
+* **Backend:** PHP / Laravel
+* **Frontend:** Vue.js (JavaScript / Node)
+* **Banco de Dados:** MySQL
+
+---
+
+## 🚀 Como Executar o Projeto
+
+### 1. Banco de Dados
+1. O arquivo de dump SQL do banco de dados encontra-se no diretório:
+   ```bash
+   dumpSql/
